@@ -1,0 +1,42 @@
+body {
+    background-color: rgb(213,227,246);
+    font-family: Arial, Helvetica, sans-serif;
+    margin: auto;
+}
+.tartalom {
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 10px 10px 5px #888888;
+    margin-bottom: 30px;
+    margin-top: 0px;
+}
+#fejlec {
+    background-image: url(számkirakó.jpg);
+    height: 200px;
+}
+#jatek {
+    background-image: url(számkirakó1.jpg);
+}
+section {
+    min-width:400px;
+    padding:20px;
+    margin: 10px auto 10px auto;
+}
+h1,p {
+    text-align:center;
+    font-size: 50px;
+    max-width: 400px;
+    padding: 25px;
+    box-sizing: border-box;
+    margin: auto;
+}
+#kirako {
+    background:rgb(5, 10, 78);
+    font-size:30px;
+    text-align:center;
+    margin: auto;
+    border-color: rgb(72, 96, 230);
+    border-radius: 5px;
+    box-shadow: 10px 10px 5px #d0d0d0;
+}

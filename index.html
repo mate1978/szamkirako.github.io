@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Számkirakó</title>
+</head>
+
+<body>
+  <div id="fejlec" class="tartalom">
+    <h1>SZÁMKIRAKÓ</h1>
+  </div>
+  <div id="jatek" class="tartalom">
+  <section>
+
+    <table id="kirako" border="1"></table>
+
+    <p><input type="button" value="KEVER" onclick="shuffle()"></p>
+  </section>
+
+  <script>
+
+    var nrow = 5;
+    var ncell = 5;
+    var tt = new Array(nrow);
+    var newrow;
+
+    for (var i = 0; i < nrow; i++) {
+      newrow = document.getElementById("kirako").insertRow(i);
+      tt[i] = new Array(ncell);
+      for (var j = 0; j < ncell; j++) {
+        tt[i][j] = newrow.insertCell(j);
+        tt[i][j].id = i * ncell + j;
+        tt[i][j].onclick = function () { mystep(this); };
+        tt[i][j].style.width = "70px";
+        tt[i][j].style.height = "70px";
+        tt[i][j].style.color = "#fcfcfc";
+        tt[i][j].style.background = "#31046d";
+        tt[i][j].innerHTML = parseInt(tt[i][j].id) + 1;
+      }
+    }
+
+    var empty = nrow * ncell - 1;
+    document.getElementById(empty.toString()).style.background = "#d0d0d0";
+    document.getElementById(empty.toString()).innerHTML = "";
+
+    function mystep(obj) {
+
+      var nid = parseInt(obj.id);
+      var nempty = parseInt(empty);
+
+      if (nid + ncell == nempty || nid - ncell == nempty ||
+        nid + 1 == nempty && nempty % ncell != 0 ||
+        nid - 1 == nempty && nid % ncell != 0) {
+
+        document.getElementById(empty.toString()).innerHTML = document.getElementById(obj.id).innerHTML;
+        document.getElementById(empty.toString()).style.background = document.getElementById(obj.id).style.background;
+        document.getElementById(obj.id).style.background = "#d0d0d0";
+        document.getElementById(obj.id).innerHTML = "";
+        empty = obj.id;
+      }
+    }
+
+    function shuffle() {
+      var xwalker;
+      var ywalker;
+      for (var i = 0; i < nrow * ncell * 6; i++) {
+        rowwalker = Math.floor(empty / ncell);
+        cellwalker = empty % ncell;
+
+        switch (Math.floor(Math.random() * 4)) {
+          case 0:
+            cellwalker += (cellwalker < ncell - 1) ? 1 : -1;
+            break;
+          case 1:
+            cellwalker += (cellwalker > 0) ? -1 : 1;
+            break;
+          case 2:
+            rowwalker += (rowwalker < nrow - 1) ? 1 : -1;
+            break;
+          case 3:
+            rowwalker += (rowwalker > 0) ? -1 : 1;
+            break;
+        }
+        mystep(document.getElementById((rowwalker * ncell + cellwalker).toString()));
+      }
+    }
+
+  </script>
+  </div>
+</body>
+
+</html>
